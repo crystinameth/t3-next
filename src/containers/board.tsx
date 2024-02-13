@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Square from "../components/square";
 type Player = "X" | "O" | null | "DRAW";
 
-function calculateWinner(squares: Player) {
+function calculateWinner(squares: Player[]) {
     const lines = [
         [0, 1, 2], 
         [3, 4, 5], 
@@ -15,7 +15,7 @@ function calculateWinner(squares: Player) {
     ];
     for(let i = 0; i < lines.length; i++) {
         const [a, b, c] = lines[i];
-        if(squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        if(squares && squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
             return squares[a];
         }
     }
@@ -40,6 +40,7 @@ function Board() {
 
     useEffect(() => {
         const w = calculateWinner(squares);
+
         if(w) {
             setWinner(w);
         }
